@@ -5,11 +5,11 @@ import java.util.Deque;
 
 public class P_1209 {
 
-    class Pair {
+   static  class pair {
         Character ch;
         int count;
 
-        Pair(char item, int count) {
+        pair(char item, int count) {
             this.ch = item;
             this.count = count;
         }
@@ -22,7 +22,7 @@ public class P_1209 {
     }
 
     public static String removeDuplicates(String s, int k) {
-        Deque<Pair> st = new ArrayDeque<>();
+        Deque<pair> st = new ArrayDeque<>();
 
         for (char ch : s.toCharArray()) {
             if (!st.isEmpty() && st.peek().ch == ch) {
@@ -32,14 +32,14 @@ public class P_1209 {
                     st.pop();
                 }
             } else {
-                st.push(new Pair(ch, 1));
+                st.push(new pair(ch, 1));
             }
 
         }
 
         StringBuilder sb = new StringBuilder();
         while (!st.isEmpty()) {
-            Pair p = st.pop();
+            pair p = st.pop();
 
             for (int i = 0; i < p.count; i++) {
                 sb.append(p.ch);
