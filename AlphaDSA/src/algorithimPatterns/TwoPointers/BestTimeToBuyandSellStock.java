@@ -6,13 +6,13 @@ public class BestTimeToBuyandSellStock {
         System.out.println("Answer : " + bestTimetobuyandSellstock(arr));
     }
 
-    public static int bestTimetobuyandSellstock(int arr[]) {
-        int maxProfit = 0;
-        int minPrice = Integer.MAX_VALUE;
+    public static int bestTimetobuyandSellstock(int nums[]) {
+        int currItem = Integer.MAX_VALUE;
+        int maxProfit = Integer.MIN_VALUE;
 
-        for (int i = 0; i < arr.length; i++) {
-            minPrice = Math.min(minPrice, arr[i]);
-            maxProfit = Math.max(maxProfit, arr[i] - minPrice);
+        for (int i = 0; i < nums.length; i++) {
+            currItem = Math.min(currItem, nums[i]);
+            maxProfit = Math.max(maxProfit, nums[i] - currItem);
         }
         return maxProfit;
     }
