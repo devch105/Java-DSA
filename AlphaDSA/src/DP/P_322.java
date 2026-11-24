@@ -12,7 +12,8 @@ public class P_322 {
 
         Map<String, Integer> map = new HashMap<>();
         System.out.println("Answer Just checking : " + coinChangeMemo(coins, map, amount, 0));
-        System.out.println("Map : "+map);
+      
+        System.out.println("Answer DP : " + coinChangeDP(coins, amount));
     }
 
     public static int coinChangeMemo(int coins[], Map<String, Integer> map, int amount, int i) {
@@ -43,6 +44,47 @@ public class P_322 {
         }
     }
 
+    public static   int coinChangeDP(int coins[], int amount) {
+        int dp[][] = new int[coins.length + 1][amount + 1];
+        for(int i = 0; i < dp.length; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+         for (int arr[] : dp) {
+            System.out.println(Arrays.toString(arr));
+            System.out.println("-------------------");
+        }
+
+        int result = solve(coins, amount, 0, amount, dp);
+
+         for (int arr[] : dp) {
+            System.out.println(Arrays.toString(arr));
+            System.out.println("-------------------");
+        }
+        return result == Integer.MAX_VALUE-1 ? -1 : result;
+    }
+
+    public static  int solve(int coins[], int amount, int i, int target, int dp[][]) {
+        if (target == 0) {
+            return 0;
+        }
+        if (i >= coins.length) {
+            return Integer.MAX_VALUE - 1;
+        }
+
+        if (dp[i][target] != -1) {
+            return dp[i][target];
+        }
+
+        if (coins[i] <= target) {
+            int pick = 1 + solve(coins, amount, i, target - coins[i], dp);
+            int notPick = solve(coins, amount, i + 1, target, dp);
+            return dp[i][target] = Math.min(pick, notPick);
+        } else {
+            return dp[i][target] = solve(coins, amount, i + 1, target, dp);
+        }
+    }
+
+
     public static int coinChange(int[] coins, int amount) {
         int INF = Integer.MAX_VALUE - 1;
         int dp[][] = new int[coins.length + 1][amount + 1];
@@ -68,11 +110,6 @@ public class P_322 {
                 }
             }
         }
-
-        for (int arr[] : dp) {
-            System.out.println(Arrays.toString(arr));
-        }
-
         return (dp[coins.length][amount] == INF)
                 ? -1
                 : dp[coins.length][amount];
