@@ -24,7 +24,8 @@ public class TreeNode {
     }
 
     public void printPreorder(TreeNode root) {
-        if (root == null) return;
+        if (root == null)
+            return;
 
         System.out.print(root.val + " ");
         printPreorder(root.left);
@@ -68,7 +69,7 @@ public class TreeNode {
     // Binary Search Tree
 
     public TreeNode buildBST() {
-        int[] arr = {4, 2, 7, 1, 3, 6, 9};
+        int[] arr = { 4, 2, 7, 1, 3, 6, 9 };
         return createBST(arr);
     }
 
@@ -101,4 +102,37 @@ public class TreeNode {
 
         return root;
     }
+
+    public static void main(String[] args) {
+        TreeNode root = new TreeNode();
+        int arr[] = { 9, 6, -3, -1, -1, -6, 2, -1, -1, 2, -1, -6, -6, -6 };
+        root = root.buildTree(arr);
+
+        System.out.println("Max Path Exist : " + maxPathSum(root));
+    }
+
+    static int max = Integer.MIN_VALUE;
+
+    public static int maxPathSum(TreeNode root) {
+        checkMax(root);
+
+        return max;
+    }
+
+    public static int checkMax(TreeNode newNode) {
+        if (newNode == null) {
+            return 0;
+        }
+
+        int leftMax = checkMax(newNode.left);
+        int rightMax = checkMax(newNode.right);
+
+        int rootMax = newNode.val
+                + Math.max(0, leftMax)
+                + Math.max(0, rightMax);
+        max = Math.max(max, rootMax);
+
+        return newNode.val + Math.max(0, Math.max(leftMax, rightMax));
+    }
+
 }

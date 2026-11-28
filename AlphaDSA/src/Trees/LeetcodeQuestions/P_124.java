@@ -4,7 +4,7 @@ public class P_124 {
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode();
-        int arr[] = { -10, 2, 7, 1, 3, 16, 9 };
+        int arr[] = { 9, 6, -3, -1, -1, -6, 2, -1, -1, 2, -1, -6, -6, -6 };
         root = root.buildTree(arr);
 
         System.out.println("Max Path Exist : " + maxPathSum(root));
