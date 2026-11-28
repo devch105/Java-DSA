@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class P_322 {
+
+    static  int INF ;
     public static void main(String[] args) {
-        int[] coins = { 2, 5, 10, 1 };
-        int amount = 27;
+        int[] coins = { 1,3,7,4};
+        int amount = 11;
+        INF = amount+31;
         System.out.println("Answer : " + coinChange(coins, amount));
 
         Map<String, Integer> map = new HashMap<>();
@@ -22,7 +25,7 @@ public class P_322 {
         }
         if (i >= coins.length) {
 
-            return Integer.MAX_VALUE - 1;
+            return INF;
         }
         String key = i + "_" + amount;
         if (map.containsKey(key)) {
@@ -68,7 +71,7 @@ public class P_322 {
             return 0;
         }
         if (i >= coins.length) {
-            return Integer.MAX_VALUE - 1;
+            return INF;
         }
 
         if (dp[i][target] != -1) {
@@ -86,14 +89,14 @@ public class P_322 {
 
 
     public static int coinChange(int[] coins, int amount) {
-        int INF = Integer.MAX_VALUE - 1;
+        int INFTY = INF;
         int dp[][] = new int[coins.length + 1][amount + 1];
 
         for (int i = 0; i < dp.length; i++) {
             dp[i][0] = 0;
         }
         for (int j = 1; j < amount + 1; j++) {
-            dp[0][j] = INF;
+            dp[0][j] = INFTY;
         }
 
         for (int i = 1; i < coins.length + 1; i++) {
@@ -110,7 +113,7 @@ public class P_322 {
                 }
             }
         }
-        return (dp[coins.length][amount] == INF)
+        return (dp[coins.length][amount] == INFTY)
                 ? -1
                 : dp[coins.length][amount];
     }

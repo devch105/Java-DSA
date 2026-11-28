@@ -25,8 +25,8 @@ public class P_518 {
      * 5=1+1+1+1+1
      */
     public static void main(String[] args) {
-        int[] coins = { 2, 5, 1 };
-        int amount = 5;
+        int[] coins = { 1,3,7,4 };
+        int amount = 6;
         Map<String, Integer> map = new HashMap<>();
         // System.out.println("Answer : " + change(amount, coins, map, 0));
 
